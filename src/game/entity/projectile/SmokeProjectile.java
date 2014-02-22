@@ -39,8 +39,6 @@ public class SmokeProjectile extends Projectile
 
     public void render(Screen screen)
     {
-        System.out.println(Math.cos(angle));
-
         screen.renderProjectile((int)(x - 7 + Math.cos(angle) * 18), (int)(y - 8 + Math.sin(angle) * 20), this);
     }
 }
