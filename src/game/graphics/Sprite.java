@@ -2,9 +2,9 @@ package game.graphics;
 
 public class Sprite
 {
-    public final int size;
+    public final int size, width, height;
     private int x, y;
-    public int[] pixels;
+    private int[] pixels;
     private SpriteSheet sheet;
 
     // Level sprites
@@ -36,8 +36,13 @@ public class Sprite
     // Projectile sprites
     public static Sprite smoke_projectile = new Sprite(16, 0, 0, SpriteSheet.projectiles);
 
+    // Particle sprites
+    public static Sprite normal_particle = new Sprite(3, 0xAAAAAA);
+
     public Sprite(int size, int x, int y, SpriteSheet sheet)
     {
+        this.width = size;
+        this.height = size;
         this.size = size;
         pixels = new int[size * size];
         this.x = x * size;
@@ -49,8 +54,19 @@ public class Sprite
 
     public Sprite(int size, int color)
     {
+        this.width = size;
+        this.height = size;
         this.size = size;
         pixels = new int[size * size];
+        setColor(color);
+    }
+
+    public Sprite(int width, int height, int color)
+    {
+        this.width = width;
+        this.height = height;
+        this.size = -1;
+        pixels = new int[width * height];
         setColor(color);
     }
 
@@ -66,4 +82,6 @@ public class Sprite
             for (int x = 0; x < size; x++)
                 pixels[x + y * size] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.size];
     }
+
+    public int[] getPixels() { return pixels; }
 }

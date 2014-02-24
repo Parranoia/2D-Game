@@ -10,6 +10,7 @@ public abstract class Mob extends Entity
     protected Sprite sprite;
     protected Direction dir = Direction.DOWN;
     protected boolean moving = false;
+    protected int fireRate;
 
     public void move(int xa, int ya)
     {
@@ -47,8 +48,8 @@ public abstract class Mob extends Entity
 
     protected void shoot(double ang)
     {
-        Projectile p = new SmokeProjectile(x, y, ang);
-        level.addProjectile(p);
+        Projectile p = new SmokeProjectile((int)(x - 7 + Math.cos(ang) * 18), (int)(y - 8 + Math.sin(ang) * 20), ang);
+        level.add(p);
     }
 
     public void render()

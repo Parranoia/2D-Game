@@ -1,6 +1,7 @@
 package game.entity.mob;
 
 import game.Game;
+import game.entity.projectile.SmokeProjectile;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 import game.input.Keyboard;
@@ -24,6 +25,7 @@ public class Player extends Mob
         this.y = y;
         this.keyboard = keyboard;
         sprite = Sprite.player_down;
+        fireRate = SmokeProjectile.FIRE_RATE;
     }
 
     public void update()
@@ -44,10 +46,24 @@ public class Player extends Mob
         else
             walking = false;
 
-        if (Mouse.getButton() == 1)
+        if (fireRate > 0) fireRate--;
+
+        if (Mouse.getButton() == 1 && fireRate <= 0)
             calcShoot();
 
         cleanUp();
+    }
+
+    private void calcShoot()
+    {
+        fireRate = SmokeProjectile.FIRE_RATE;
+
+        double dx = Mouse.getX() - Game.getGameWidth() / 2;
+        double dy = Mouse.getY() - Game.getGameHeight() / 2;
+
+        double ang = Math.atan2(dy, dx);
+
+        shoot(ang);
     }
 
     private void cleanUp()
@@ -55,19 +71,6 @@ public class Player extends Mob
         for (int i = 0; i < level.getProjectiles().size(); i++)
             if (level.getProjectiles().get(i).isRemoved())
                 level.getProjectiles().remove(i);
-    }
-
-    private void calcShoot()
-    {
-        if (Mouse.getButton() == 1)
-        {
-            double dx = Mouse.getX() - Game.getGameWidth() / 2;
-            double dy = Mouse.getY() - Game.getGameHeight() / 2;
-
-            double ang = Math.atan2(dy, dx);
-
-            shoot(ang);
-        }
     }
 
     public void render(Screen screen)

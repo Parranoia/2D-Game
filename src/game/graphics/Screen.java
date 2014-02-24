@@ -1,6 +1,7 @@
 package game.graphics;
 
 import game.entity.projectile.Projectile;
+import game.level.tile.Tile;
 
 import java.util.Random;
 
@@ -30,22 +31,42 @@ public class Screen
             pixels[i] = 0;
     }
 
-    public void renderTile(int xp, int yp, Sprite sprite)
+    public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed)
+    {
+        if (fixed)
+        {
+            xp -= xOffset;
+            yp -= yOffset;
+        }
+        for (int y = 0; y < sprite.height; y++)
+        {
+            int ya = y + yp;
+            for (int x = 0; x < sprite.width; x++)
+            {
+                int xa = x + xp;
+                if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+
+                pixels[xa + ya * width] = sprite.getPixels()[x + y * sprite.width];
+            }
+        }
+    }
+
+    public void renderTile(int xp, int yp, Tile tile)
     {
         xp -= xOffset;
         yp -= yOffset;
-        for (int y = 0; y < sprite.size; y++)
+        for (int y = 0; y < tile.getSpriteSize(); y++)
         {
             int ya = y + yp;
-            for (int x = 0; x < sprite.size; x++)
+            for (int x = 0; x < tile.getSpriteSize(); x++)
             {
                 int xa = x + xp;
-                if (xa < -sprite.size || xa >= width || ya < 0 || ya >= height) break;
+                if (xa < -tile.getSpriteSize() || xa >= width || ya < 0 || ya >= height) break;
                 if (xa < 0) xa = 0;
 
-                int color = sprite.pixels[x + y * sprite.size];
+                int color = tile.getSpritePixels()[x + y * tile.getSpriteSize()];
                 if (color != 0xffff00ff)
-                    pixels[xa + ya * width] = sprite.pixels[x + y * sprite.size];
+                    pixels[xa + ya * width] = tile.getSpritePixels()[x + y * tile.getSpriteSize()];
             }
         }
     }
@@ -63,9 +84,9 @@ public class Screen
                 if (xa < -sprite.size || xa >= width || ya < 0 || ya >= height) break;
                 if (xa < 0) xa = 0;
 
-                int color = sprite.pixels[x + y * sprite.size];
+                int color = sprite.getPixels()[x + y * sprite.size];
                 if (color != 0xffff00ff)
-                    pixels[xa + ya * width] = sprite.pixels[x + y * sprite.size];
+                    pixels[xa + ya * width] = sprite.getPixels()[x + y * sprite.size];
             }
         }
     }
@@ -83,9 +104,9 @@ public class Screen
                 if (xa < -p.getSpriteSize() || xa >= width || ya < 0 || ya >= height) break;
                 if (xa < 0) xa = 0;
 
-                int color = p.getSprite().pixels[x + y * p.getSpriteSize()];
+                int color = p.getSprite().getPixels()[x + y * p.getSpriteSize()];
                 if (color != 0xffff00ff)
-                    pixels[xa + ya * width] = p.getSprite().pixels[x + y * p.getSpriteSize()];
+                    pixels[xa + ya * width] = p.getSprite().getPixels()[x + y * p.getSpriteSize()];
             }
         }
     }

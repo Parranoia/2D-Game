@@ -6,7 +6,7 @@ import game.graphics.Sprite;
 public class Tile
 {
     public int x, y;
-    public Sprite sprite;
+    private Sprite sprite;
 
     public static Tile grass = new GrassTile(Sprite.grass);
     public static Tile flower = new FlowerTile(Sprite.flower);
@@ -30,4 +30,10 @@ public class Tile
     {
         return false;
     }
+
+    public Sprite getSprite() { return sprite; }
+
+    public int getSpriteSize() { return sprite.size; }
+
+    public int[] getSpritePixels() { return sprite.getPixels(); }
 }

@@ -1,18 +1,20 @@
 package game.entity.projectile;
 
+import game.entity.particle.Particle;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 
 public class SmokeProjectile extends Projectile
 {
+    public static final int FIRE_RATE = 15;
+
     public SmokeProjectile(int x, int y, double angle)
     {
         super(x, y, angle);
 
-        range = 100;
+        range = 150;
         speed = 4;
         damage = 20;
-        rate = 15;
         sprite = Sprite.smoke_projectile;
 
         nx = Math.cos(angle) * speed;
@@ -21,7 +23,14 @@ public class SmokeProjectile extends Projectile
 
     public void update()
     {
-        move();
+        if (level.tileCollision(x, y, nx, ny, 6))
+        {
+            Particle p = new Particle((int)x, (int)y, 50);
+            level.add(p);
+            remove();
+        }
+        else
+            move();
     }
 
     protected void move()
@@ -39,6 +48,6 @@ public class SmokeProjectile extends Projectile
 
     public void render(Screen screen)
     {
-        screen.renderProjectile((int)(x - 7 + Math.cos(angle) * 18), (int)(y - 8 + Math.sin(angle) * 20), this);
+        screen.renderProjectile((int)x, (int)y, this);
     }
 }
