@@ -1,6 +1,6 @@
-package game.entity;
+package game.entity.emitter;
 
-import game.entity.particle.Particle;
+import game.entity.Entity;
 import game.level.Level;
 
 public class Emitter extends Entity
@@ -15,16 +15,9 @@ public class Emitter extends Entity
 
     public Emitter(int x, int y, Type type, int amount, Level level)
     {
+        init(level);
         this.x = x;
         this.y = y;
         this.type = type;
-
-        for (int i = 0; i < amount; i++)
-        {
-            if (type == Type.PARTICLE)
-            {
-                level.add(new Particle(x, y, 50));
-            }
-        }
     }
 }

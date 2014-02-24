@@ -50,8 +50,6 @@ public class Player extends Mob
 
         if (Mouse.getButton() == 1 && fireRate <= 0)
             calcShoot();
-
-        cleanUp();
     }
 
     private void calcShoot()
@@ -64,13 +62,6 @@ public class Player extends Mob
         double ang = Math.atan2(dy, dx);
 
         shoot(ang);
-    }
-
-    private void cleanUp()
-    {
-        for (int i = 0; i < level.getProjectiles().size(); i++)
-            if (level.getProjectiles().get(i).isRemoved())
-                level.getProjectiles().remove(i);
     }
 
     public void render(Screen screen)

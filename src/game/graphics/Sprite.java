@@ -39,6 +39,14 @@ public class Sprite
     // Particle sprites
     public static Sprite normal_particle = new Sprite(3, 0xAAAAAA);
 
+    protected Sprite(SpriteSheet sheet, int width, int height)
+    {
+        this.size = width == height ? width : -1;
+        this.width = width;
+        this.height = height;
+        this.sheet = sheet;
+    }
+
     public Sprite(int size, int x, int y, SpriteSheet sheet)
     {
         this.width = size;

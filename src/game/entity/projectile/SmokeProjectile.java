@@ -1,6 +1,6 @@
 package game.entity.projectile;
 
-import game.entity.particle.Particle;
+import game.entity.emitter.ParticleEmitter;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 
@@ -23,10 +23,10 @@ public class SmokeProjectile extends Projectile
 
     public void update()
     {
-        if (level.tileCollision(x, y, nx, ny, 6))
+        /*if (level.tileCollision(x, y, nx, ny, 6))*/
+        if (level.tileCollision((int)(x + nx), (int)(y + ny), 6, 5, 5))
         {
-            Particle p = new Particle((int)x, (int)y, 50);
-            level.add(p);
+            level.add(new ParticleEmitter((int) x, (int) y, 30, 50, level));
             remove();
         }
         else
