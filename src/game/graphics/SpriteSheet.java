@@ -10,36 +10,60 @@ public class SpriteSheet
     public final int size;
     public final int width, height;
     public int[] pixels;
+    private Sprite[] sprites;
 
     public static SpriteSheet tiles = new SpriteSheet("/textures/sheets/SpriteSheet.png", 256);
     public static SpriteSheet projectiles = new SpriteSheet("/textures/sheets/projectiles/projectile.png", 48);
     // Player
     public static SpriteSheet player = new SpriteSheet("/textures/sheets/player.png", 96, 128);
-    public static SpriteSheet player_up = new SpriteSheet(player, 0, 0, 3, 1, 32);
-    public static SpriteSheet player_down = new SpriteSheet(player, 3, 0, 3, 1, 32);
-    public static SpriteSheet player_left = new SpriteSheet(player, 1, 0, 3, 1, 32);
-    public static SpriteSheet player_right = new SpriteSheet(player, 2, 0, 3, 1, 32);
+    public static SpriteSheet player_up = new SpriteSheet(player, 0, 3, 3, 1, 32);
+    public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 3, 1, 32);
+    public static SpriteSheet player_left = new SpriteSheet(player, 0, 1, 3, 1, 32);
+    public static SpriteSheet player_right = new SpriteSheet(player, 0, 2, 3, 1, 32);
 
     public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize)
     {
         int xx = x * spriteSize;
         int yy = y * spriteSize;
+        int w = width * spriteSize;
+        int h = height * spriteSize;
 
-        this.path = sheet.path;
         this.size = width == height ? width : -1;
-        this.width = width * spriteSize;
-        this.height = height * spriteSize;
-        pixels = new int[this.width * this.height];
+        this.width = w;
+        this.height = h;
+        pixels = new int[w * h];
 
-        for (int yp = 0; y < this.height; y++)
+        for (int yp = 0; yp < h; yp++)
         {
             int ya = yy + yp;
-            for (int xp = 0; x < this.width; x++)
+            for (int xp = 0; xp < w; xp++)
             {
                 int xa = xx + xp;
-                pixels[xp + yp * this.height] = sheet.pixels[xa + ya * sheet.width];
+                pixels[xp + yp * w] = sheet.pixels[xa + ya * sheet.width];
             }
         }
+
+        sprites = new Sprite[width * height];
+
+        int pos = 0;
+
+        for (int ya = 0; ya < height; ya++)
+        {
+            for (int xa = 0; xa < width; xa++)
+            {
+                int[] spritePixels = new int[spriteSize * spriteSize];
+
+                for (int yp = 0; yp < spriteSize; yp++)
+                {
+                    for (int xp = 0; xp < spriteSize; xp++)
+                    {
+                         spritePixels[xp + yp * spriteSize] = pixels[(xp + xa * spriteSize) + (yp + ya * spriteSize) * this.width];
+                    }
+                }
+                sprites[pos++] = new Sprite(spritePixels, spriteSize, spriteSize);
+            }
+        }
+
     }
 
     public SpriteSheet(String path, int size)
@@ -62,6 +86,11 @@ public class SpriteSheet
         pixels = new int[width * height];
 
         load();
+    }
+
+    public Sprite[] getSprites()
+    {
+        return sprites;
     }
 
     private void load()

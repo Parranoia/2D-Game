@@ -5,7 +5,7 @@ public class Sprite
     public final int size, width, height;
     private int x, y;
     private int[] pixels;
-    private SpriteSheet sheet;
+    protected SpriteSheet sheet;
 
     // Level sprites
     public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
@@ -58,6 +58,14 @@ public class Sprite
         this.sheet = sheet;
 
         load();
+    }
+
+    public Sprite(int[] spritePixels, int width, int height)
+    {
+        size = width == height ? width : -1;
+        this.width = width;
+        this.height = height;
+        this.pixels = spritePixels;
     }
 
     public Sprite(int size, int color)

@@ -2,8 +2,10 @@ package game.entity.mob;
 
 import game.Game;
 import game.entity.projectile.SmokeProjectile;
+import game.graphics.AnimatedSprite;
 import game.graphics.Screen;
 import game.graphics.Sprite;
+import game.graphics.SpriteSheet;
 import game.input.Keyboard;
 import game.input.Mouse;
 
@@ -12,11 +14,18 @@ public class Player extends Mob
     private Keyboard keyboard;
     private int anim;
     private boolean walking = false;
+    private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
+    private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
+    private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 3);
+    private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
+
+    private AnimatedSprite animSprite = null;
 
     public Player(Keyboard keyboard)
     {
         this.keyboard = keyboard;
         sprite = Sprite.player_down;
+        animSprite = down;
     }
 
     public Player(int x, int y, Keyboard keyboard)
@@ -26,17 +35,37 @@ public class Player extends Mob
         this.keyboard = keyboard;
         sprite = Sprite.player_down;
         fireRate = SmokeProjectile.FIRE_RATE;
+        animSprite = down;
     }
 
     public void update()
     {
+        if (walking) animSprite.update();
+        else animSprite.setFrame(1);
+
         int xa = 0, ya = 0;
         anim = anim < 10000 ? ++anim : 0;
 
-        if (keyboard.up) ya--;
-        if (keyboard.down) ya++;
-        if (keyboard.left) xa--;
-        if (keyboard.right) xa++;
+        if (keyboard.up)
+        {
+            animSprite = up;
+            ya--;
+        }
+        else if (keyboard.down)
+        {
+            animSprite = down;
+            ya++;
+        }
+        if (keyboard.left)
+        {
+            animSprite = left;
+            xa--;
+        }
+        else if (keyboard.right)
+        {
+            animSprite = right;
+            xa++;
+        }
 
         if (xa != 0 || ya != 0)
         {
@@ -66,7 +95,7 @@ public class Player extends Mob
 
     public void render(Screen screen)
     {
-        if (dir == Direction.UP)
+        /*if (dir == Direction.UP)
         {
             sprite = Sprite.player_up;
             if (walking)
@@ -109,7 +138,8 @@ public class Player extends Mob
                 else
                     sprite = Sprite.player_right2;
             }
-        }
+        }*/
+        sprite = animSprite.getSprite();
 
         screen.renderPlayer(x - 16, y - 16, sprite);
     }
