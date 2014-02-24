@@ -21,6 +21,13 @@ public class SpriteSheet
     public static SpriteSheet player_left = new SpriteSheet(player, 0, 1, 3, 1, 32);
     public static SpriteSheet player_right = new SpriteSheet(player, 0, 2, 3, 1, 32);
 
+    // Dummy mob
+    public static SpriteSheet mob1 = new SpriteSheet("/textures/sheets/mob1.png", 96, 128);
+    public static SpriteSheet mob1_up = new SpriteSheet(mob1, 0, 3, 3, 1, 32);
+    public static SpriteSheet mob1_down = new SpriteSheet(mob1, 0, 0, 3, 1, 32);
+    public static SpriteSheet mob1_left = new SpriteSheet(mob1, 0, 1, 3, 1, 32);
+    public static SpriteSheet mob1_right = new SpriteSheet(mob1, 0, 2, 3, 1, 32);
+
     public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize)
     {
         int xx = x * spriteSize;

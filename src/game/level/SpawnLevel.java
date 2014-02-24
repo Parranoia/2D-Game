@@ -1,5 +1,7 @@
 package game.level;
 
+import game.entity.mob.Dummy;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -25,6 +27,8 @@ public class SpawnLevel extends Level
         {
             e.printStackTrace();
         }
+
+        add(new Dummy(10, 20));
     }
 
     // Grass = 0xFF00FF00

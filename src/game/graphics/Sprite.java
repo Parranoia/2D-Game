@@ -18,7 +18,7 @@ public class Sprite
 
     // Player sprites
     public static Sprite player_down = new Sprite(32, 1, 4, SpriteSheet.tiles);
-    public static Sprite player_down1 = new Sprite(32, 0, 4, SpriteSheet.tiles);
+    /*public static Sprite player_down1 = new Sprite(32, 0, 4, SpriteSheet.tiles);
     public static Sprite player_down2 = new Sprite(32, 2, 4, SpriteSheet.tiles);
 
     public static Sprite player_up = new Sprite(32, 1, 7, SpriteSheet.tiles);
@@ -31,13 +31,13 @@ public class Sprite
 
     public static Sprite player_right = new Sprite(32, 1, 6, SpriteSheet.tiles);
     public static Sprite player_right1 = new Sprite(32, 0, 6, SpriteSheet.tiles);
-    public static Sprite player_right2 = new Sprite(32, 2, 6, SpriteSheet.tiles);
+    public static Sprite player_right2 = new Sprite(32, 2, 6, SpriteSheet.tiles);*/
 
     // Projectile sprites
     public static Sprite smoke_projectile = new Sprite(16, 0, 0, SpriteSheet.projectiles);
 
     // Particle sprites
-    public static Sprite normal_particle = new Sprite(3, 0xAAAAAA);
+    public static Sprite normal_particle = new Sprite(2, 0xAAAAAA);
 
     protected Sprite(SpriteSheet sheet, int width, int height)
     {
@@ -94,9 +94,9 @@ public class Sprite
 
     private void load()
     {
-        for (int y = 0; y < size; y++)
-            for (int x = 0; x < size; x++)
-                pixels[x + y * size] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.size];
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+                pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.width];
     }
 
     public int[] getPixels() { return pixels; }

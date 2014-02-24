@@ -12,15 +12,9 @@ public abstract class Entity
     protected Level level;
     protected final Random random = new Random();
 
-    public void update()
-    {
+    public void update() { }
 
-    }
-
-    public void render(Screen screen)
-    {
-
-    }
+    public void render(Screen screen) { }
 
     public void remove()
     {
