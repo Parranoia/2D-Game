@@ -6,7 +6,6 @@ public class Sprite
     private int x, y;
     private int[] pixels;
     protected SpriteSheet sheet;
-    public int color;
 
     // Level sprites
     public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
@@ -72,7 +71,6 @@ public class Sprite
 
     public void setColor(int color)
     {
-        this.color = color;
         for (int i = 0; i < pixels.length; i++)
             pixels[i] = color;
     }
