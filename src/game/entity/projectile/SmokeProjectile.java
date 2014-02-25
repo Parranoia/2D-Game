@@ -23,7 +23,6 @@ public class SmokeProjectile extends Projectile
 
     public void update()
     {
-        /*if (level.tileCollision(x, y, nx, ny, 6))*/
         if (level.tileCollision((int)(x + nx), (int)(y + ny), 6, 5, 5))
         {
             level.add(new ParticleEmitter((int) x, (int) y, 30, 50, level));

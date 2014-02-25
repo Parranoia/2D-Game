@@ -47,7 +47,7 @@ public class Game extends Canvas implements Runnable
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 
         screen = new Screen(WIDTH, HEIGHT);
