@@ -4,6 +4,8 @@ import game.entity.Entity;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 
+import java.awt.*;
+
 public class Particle extends Entity
 {
     private Sprite sprite;

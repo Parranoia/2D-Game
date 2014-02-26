@@ -20,6 +20,9 @@ public abstract class Mob extends Entity
         if (ya > 0) dir = Direction.DOWN;
         if (ya < 0) dir = Direction.UP;
 
+        if (xa != 0 || ya != 0)
+            walking = true;
+
         if (!collision(xa, 0))
             x += xa;
 
@@ -45,6 +48,8 @@ public abstract class Mob extends Entity
 
         return solid;
     }
+
+    public abstract void initAI();
 
     protected void shoot(double ang)
     {

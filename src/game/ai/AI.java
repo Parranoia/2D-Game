@@ -25,8 +25,7 @@ public abstract class AI
         int x = me.getX();
         int y = me.getY();
         for (Player p : level.getPlayers())
-            if (Math.sqrt((p.getX() - x) * (p.getX() - x) + (p.getY() - y) * (p.getY() - y)) <
-                Math.sqrt((temp.getX() - x) * (temp.getX() - x) + (temp.getY() - y) * (temp.getY() - y)))
+            if (me.distanceTo(p) < me.distanceTo(temp))
                 temp = p;
         return temp;
     }

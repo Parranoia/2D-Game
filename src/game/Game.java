@@ -55,7 +55,7 @@ public class Game extends Canvas implements Runnable
         level = new SpawnLevel("/levels/level.png");
         TileCoordinate spawnLoc = new TileCoordinate(10, 15);
         player = new Player(spawnLoc.x(), spawnLoc.y(), keyboard);
-        player.init(level);
+        level.add(player);
 
         addKeyListener(keyboard);
         Mouse mouse = new Mouse();
@@ -121,7 +121,6 @@ public class Game extends Canvas implements Runnable
     public void update()
     {
         keyboard.update();
-        player.update();
         level.update();
     }
 

@@ -90,4 +90,6 @@ public class Player extends Mob
 
         screen.renderMob(x - 16, y - 16, sprite);
     }
+
+    public void initAI() { }
 }

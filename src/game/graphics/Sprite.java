@@ -20,7 +20,7 @@ public class Sprite
     public static Sprite smoke_projectile = new Sprite(16, 0, 0, SpriteSheet.projectiles);
 
     // Particle sprites
-    public static Sprite normal_particle = new Sprite(2, 0xFFAAAAAA);
+    public static Sprite normal_particle = new Sprite(2, 0xAAAAAA);
 
     protected Sprite(SpriteSheet sheet, int width, int height)
     {

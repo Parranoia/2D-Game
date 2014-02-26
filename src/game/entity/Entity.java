@@ -21,6 +21,11 @@ public abstract class Entity
         removed = true;
     }
 
+    public double distanceTo(Entity e)
+    {
+        return Math.sqrt((e.x - x) * (e.x - x) + (e.y - y) * (e.y - y));
+    }
+
     public void init(Level level) { this.level = level; }
 
     public boolean isRemoved()

@@ -1,6 +1,7 @@
 package game.level;
 
 import game.entity.Entity;
+import game.entity.mob.Mob;
 import game.entity.mob.Player;
 import game.graphics.Screen;
 import game.level.tile.Tile;
@@ -108,6 +109,9 @@ public class Level
     {
         e.init(this);
         entities.add(e);
+
+        if (e instanceof Mob)
+            ((Mob)e).initAI();
     }
 
     public List<Player> getPlayers()
@@ -116,6 +120,7 @@ public class Level
         for (Entity e : entities)
             if (e instanceof Player)
                 players.add((Player)e);
+
         return players;
     }
 }
