@@ -1,8 +1,7 @@
 package game.level;
 
 import game.entity.Entity;
-import game.entity.particle.Particle;
-import game.entity.projectile.Projectile;
+import game.entity.mob.Player;
 import game.graphics.Screen;
 import game.level.tile.Tile;
 
@@ -16,8 +15,6 @@ public class Level
     protected int[] tiles;
 
     private List<Entity> entities = new ArrayList<Entity>();
-    private List<Projectile> projectiles = new ArrayList<Projectile>();
-    private List<Particle> particles = new ArrayList<Particle>();
 
     public Level(int width, int height)
     {
@@ -52,19 +49,6 @@ public class Level
             if (entities.get(i).isRemoved())
                 entities.remove(i);
         }
-        for (int i = 0; i < projectiles.size(); i++)
-        {
-            projectiles.get(i).update();
-            if (projectiles.get(i).isRemoved())
-                projectiles.remove(i);
-        }
-        for (int i = 0; i < particles.size(); i++)
-        {
-            particles.get(i).update();
-            if (particles.get(i).isRemoved())
-                particles.remove(i);
-        }
-
     }
 
     private void time()
@@ -105,17 +89,8 @@ public class Level
 
         for (int i = 0; i < entities.size(); i++)
             entities.get(i).render(screen);
-
-        for (int i = 0; i < projectiles.size(); i++)
-            projectiles.get(i).render(screen);
-
-        for (int i = 0; i < particles.size(); i++)
-            particles.get(i).render(screen);
     }
 
-    // Grass = 0xFF00FF00
-    // Flower = 0xFFFFFF00
-    // Rock = 0xFF7F7F00
     public Tile getTile(int x, int y)
     {
         if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
@@ -132,13 +107,15 @@ public class Level
     public void add(Entity e)
     {
         e.init(this);
-        if (e instanceof Particle)
-            particles.add((Particle)e);
-        else if (e instanceof Projectile)
-            projectiles.add((Projectile)e);
-        else
-            entities.add(e);
+        entities.add(e);
     }
 
-    public List<Projectile> getProjectiles() { return projectiles; }
+    public List<Player> getPlayers()
+    {
+        List<Player> players = new ArrayList<Player>();
+        for (Entity e : entities)
+            if (e instanceof Player)
+                players.add((Player)e);
+        return players;
+    }
 }
