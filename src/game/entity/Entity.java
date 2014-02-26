@@ -1,5 +1,6 @@
 package game.entity;
 
+import game.entity.mob.Mob;
 import game.graphics.Screen;
 import game.level.Level;
 
@@ -26,7 +27,12 @@ public abstract class Entity
         return Math.sqrt((e.x - x) * (e.x - x) + (e.y - y) * (e.y - y));
     }
 
-    public void init(Level level) { this.level = level; }
+    public void init(Level level)
+    {
+        this.level = level;
+        if (this instanceof Mob)
+            ((Mob)this).initAI();
+    }
 
     public boolean isRemoved()
     {
