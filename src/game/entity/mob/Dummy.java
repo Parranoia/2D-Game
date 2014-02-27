@@ -25,6 +25,7 @@ public class Dummy extends Mob
         sprite = down.getSprite();
         animSprite = down;
         walking = false;
+        speed = 1.0;
     }
 
     public void initAI()
@@ -55,6 +56,6 @@ public class Dummy extends Mob
     {
         sprite = animSprite.getSprite();
 
-        screen.renderMob(x - sprite.width / 2, y - sprite.height / 2, sprite);
+        screen.renderMob((int)x - sprite.width / 2, (int)y - sprite.height / 2, sprite);
     }
 }

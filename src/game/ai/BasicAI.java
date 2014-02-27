@@ -23,8 +23,8 @@ public class BasicAI extends AI
         if (target.distanceTo(me) < 60.0)
         {
 
-            int xa = target.getX() - me.getX();
-            int ya = target.getY() - me.getY();
+            double xa = target.getX() - me.getX();
+            double ya = target.getY() - me.getY();
 
             xa = xa == 0 ? xa : xa / Math.abs(xa);
             ya = ya == 0 ? ya : ya / Math.abs(ya);

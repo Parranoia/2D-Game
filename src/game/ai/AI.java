@@ -22,8 +22,6 @@ public abstract class AI
     public Player getClosestPlayer()
     {
         Player temp = level.getPlayers().get(0);
-        int x = me.getX();
-        int y = me.getY();
         for (Player p : level.getPlayers())
             if (me.distanceTo(p) < me.distanceTo(temp))
                 temp = p;

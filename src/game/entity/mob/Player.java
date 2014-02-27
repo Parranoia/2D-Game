@@ -4,6 +4,7 @@ import game.Game;
 import game.entity.projectile.SmokeProjectile;
 import game.graphics.AnimatedSprite;
 import game.graphics.Screen;
+import game.graphics.Sprite;
 import game.graphics.SpriteSheet;
 import game.input.Keyboard;
 import game.input.Mouse;
@@ -18,7 +19,7 @@ public class Player extends Mob
 
     private AnimatedSprite animSprite;
 
-    public Player(int x, int y, Keyboard keyboard)
+    public Player(double x, double y, Keyboard keyboard)
     {
         this.x = x;
         this.y = y;
@@ -28,6 +29,7 @@ public class Player extends Mob
         sprite = down.getSprite();
         animSprite = down;
         walking = false;
+        speed = 1.0;
     }
 
     public void update()
@@ -88,7 +90,7 @@ public class Player extends Mob
     {
         sprite = animSprite.getSprite();
 
-        screen.renderMob(x - 16, y - 16, sprite);
+        screen.renderMob((int)x - 16, (int)y - 16, sprite);
     }
 
     public void initAI() { }
